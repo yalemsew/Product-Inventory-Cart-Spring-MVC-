@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Products List</title>
+</head>
+<body>
+<h2>Product List</h2>
+<table border="1">
+    <tr>
+        <th>Product Number</th>
+        <th>Name</th>
+        <th>Price</th>
+<!--        <th>Actions</th> &lt;!&ndash; New column for Remove and Add to Cart buttons &ndash;&gt;-->
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.productNumber}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td>
+            <form action="/removeproduct" method="post" style="display:inline;">
+                <input type="hidden" name="productNumber" th:value="${product.productNumber}" />
+                <button type="submit">Remove</button>
+            </form>
+            <form action="/addtocart" method="post" style="display:inline;">
+                <input type="hidden" name="productNumber" th:value="${product.productNumber}" />
+                <button type="submit">Add to Cart</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<br/>
+<form action="/addproductpage">
+    <button type="submit">Add Product</button>
+</form>
+<br/>
+<form action="/cart">
+    <button type="submit">Go to Cart</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Product</title>
+</head>
+<body>
+<h2>Add Product</h2>
+<form action="#" th:action="@{/products}" th:object="${product}" method="post">
+
+    <label>Product Number:</label>
+    <input type="number" th:field="*{productNumber}" required/>
+    <p style="color:gray;">Must be greater than 0</p>
+    <p style="color:red;" th:if="${#fields.hasErrors('productNumber')}" th:errors="*{productNumber}"></p>
+    <br/><br/>
+
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" required/>
+    <p style="color:gray;">Size must be between 2 to 10 characters</p>
+    <p style="color:red;" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+    <br/><br/>
+
+    <label>Price:</label>
+    <input type="number" step="0.01" th:field="*{price}" required/>
+    <p style="color:gray;">Must be greater than 0</p>
+    <p style="color:red;" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+    <br/><br/>
+
+    <button type="submit">Save</button>
+</form>
+<br/>
+<form action="/products">
+    <button type="submit">Back to Products</button>
+</form>
+</body>
+</html>
